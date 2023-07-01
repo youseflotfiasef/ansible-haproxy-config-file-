@@ -1,0 +1,5 @@
+---
+- hosts: Startup_haproxy
+  remote_user: root
+  roles:
+    - Haproxy

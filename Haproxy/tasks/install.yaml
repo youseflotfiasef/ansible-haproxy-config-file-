@@ -1,0 +1,25 @@
+---
+- name: Check if haproxy has already been installed
+  stat:
+    path: /etc/_haproxy_installed
+  register: "_haproxy_installed"
+
+- name: Add haproxy repo
+  apt_repository:
+    repo: ppa:vbernat/haproxy-2.4
+    state: present
+
+- name: Install haproxy
+  apt:
+    name: haproxy
+    update_cache: yes
+    state: present
+  when:
+    - not _haproxy_installed.stat.exists 
+
+- name: Mark haproxy as installed
+  file:
+    path: /etc/_haproxy_installed
+    state: touch
+  when:
+    - not _haproxy_installed.stat.exists

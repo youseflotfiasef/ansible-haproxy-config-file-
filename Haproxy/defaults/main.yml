@@ -1,0 +1,5 @@
+---
+# defaults file for Haproxy
+haproxy:
+  config_file_name: "haproxy-config"
+  version: 2.4
